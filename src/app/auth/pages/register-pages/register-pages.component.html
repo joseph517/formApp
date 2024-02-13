@@ -106,11 +106,11 @@
 <h2>Form errors</h2>
 <pre>{{ myForm.errors | json }}</pre>
 
-<!-- <h5>Nombre</h5>
+<h5>Nombre</h5>
 <pre>{{ 'formulario' | json }}</pre>
 
 <h5>Email</h5>
-<pre>{{ 'formulario' | json }}</pre>-->
+<pre>{{ myForm.controls['email'].errors | json }}</pre>
 
 <h5>Username</h5>
 <pre>{{ myForm.controls['username'].errors | json }}</pre>
