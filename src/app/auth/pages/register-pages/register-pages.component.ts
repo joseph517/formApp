@@ -13,22 +13,26 @@ export class RegisterPagesComponent {
 
   constructor(
     private fb: FormBuilder,
-    private ValidatorsService: ValidatorsService,
+    private validatorsService: ValidatorsService,
     private emailValidatorService: EmailValidatorService
     ){}
 
   public myForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.pattern(this.ValidatorsService.firstNameAndLastnamePattern)]],
+    name: ['', [Validators.required, Validators.pattern(this.validatorsService.firstNameAndLastnamePattern)]],
     // email: ['', [Validators.required, Validators.pattern(this.ValidatorsService.emailPattern)], [new EmailValidatorService()]],
-    email: ['', [Validators.required, Validators.pattern(this.ValidatorsService.emailPattern)], [this.emailValidatorService]],
+    email: ['', [Validators.required, Validators.pattern(this.validatorsService.emailPattern)], [this.emailValidatorService]],
 
-    username: ['', [Validators.required, this.ValidatorsService.canBeStrider]],
+    username: ['', [Validators.required, this.validatorsService.canBeStrider]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     password2: ['', [Validators.required, Validators.minLength(6)]],
+  },{
+    validators: [
+      this.validatorsService.isFieldOneEquealFieldTwo('password', 'password2')
+    ]
   })
 
   isValidfield(field: string){
-    return this.ValidatorsService.isValidField(this.myForm, field )
+    return this.validatorsService.isValidField(this.myForm, field )
   }
 
   onSubmit(){
